@@ -1,0 +1,8 @@
+[user]
+	name = Robert DeLuca
+	email = 
+[pull]
+	rebase = true
+[alias]
+	s = status
+	co = checkout

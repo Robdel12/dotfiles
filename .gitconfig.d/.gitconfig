@@ -1,8 +1,10 @@
 [user]
 	name = Robert DeLuca
-	email = 
+	email = robertdeluca19@gmail.com 
 [pull]
 	rebase = true
 [alias]
 	s = status
 	co = checkout
+[core]
+	excludesfile = ~/.gitignore_global

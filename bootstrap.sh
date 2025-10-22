@@ -28,22 +28,26 @@ if [ -d "$DOTFILES_DIR" ]; then
 fi
 
 ############################
-# 2. Gitconfig Setup
+# 2. Symlink dotfiles
 ############################
-GITCONFIG_SOURCE="$DOTFILES_DIR/.gitconfig"
-GITCONFIG_DEST="$HOME/.gitconfig"
+echo "Setting up dotfiles symlinks..."
 
-if [ -f "$GITCONFIG_SOURCE" ]; then
-  echo "Found .gitconfig in dotfiles repository."
-  if [ -f "$GITCONFIG_DEST" ]; then
-    echo "Existing .gitconfig found at $GITCONFIG_DEST. Backing up to $GITCONFIG_DEST.bak..."
-    cp "$GITCONFIG_DEST" "$GITCONFIG_DEST.bak"
-  fi
-  echo "Copying .gitconfig to $GITCONFIG_DEST..."
-  cp "$GITCONFIG_SOURCE" "$GITCONFIG_DEST"
-  echo ".gitconfig copied."
-else
-  echo ".gitconfig not found in dotfiles repository ($GITCONFIG_SOURCE). Skipping setup."
+# Symlink .zshrc
+if [ -f "$DOTFILES_DIR/.zsh/.zshrc" ]; then
+  ln -sf "$DOTFILES_DIR/.zsh/.zshrc" "$HOME/.zshrc"
+  echo "Linked .zshrc"
+fi
+
+# Symlink .gitconfig
+if [ -f "$DOTFILES_DIR/.gitconfig.d/.gitconfig" ]; then
+  ln -sf "$DOTFILES_DIR/.gitconfig.d/.gitconfig" "$HOME/.gitconfig"
+  echo "Linked .gitconfig"
+fi
+
+# Symlink .gitignore_global
+if [ -f "$DOTFILES_DIR/.gitignore_global" ]; then
+  ln -sf "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
+  echo "Linked .gitignore_global"
 fi
 
 ############################
@@ -77,6 +81,11 @@ BREW_PKGS=(
   zsh
   rbenv
   nvm
+  wget
+  jq
+  gh
+  tree
+  pnpm
 )
 
 BREW_CASKS=(

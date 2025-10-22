@@ -30,24 +30,28 @@ fi
 ############################
 # 2. Symlink dotfiles
 ############################
-echo "Setting up dotfiles symlinks..."
+if [ -d "$DOTFILES_DIR" ]; then
+  echo "Setting up dotfiles symlinks..."
 
-# Symlink .zshrc
-if [ -f "$DOTFILES_DIR/.zsh/.zshrc" ]; then
-  ln -sf "$DOTFILES_DIR/.zsh/.zshrc" "$HOME/.zshrc"
-  echo "Linked .zshrc"
-fi
+  # Symlink .zshrc
+  if [ -f "$DOTFILES_DIR/.zsh/.zshrc" ]; then
+    ln -sf "$DOTFILES_DIR/.zsh/.zshrc" "$HOME/.zshrc"
+    echo "Linked .zshrc"
+  fi
 
-# Symlink .gitconfig
-if [ -f "$DOTFILES_DIR/.gitconfig.d/.gitconfig" ]; then
-  ln -sf "$DOTFILES_DIR/.gitconfig.d/.gitconfig" "$HOME/.gitconfig"
-  echo "Linked .gitconfig"
-fi
+  # Symlink .gitconfig
+  if [ -f "$DOTFILES_DIR/.gitconfig.d/.gitconfig" ]; then
+    ln -sf "$DOTFILES_DIR/.gitconfig.d/.gitconfig" "$HOME/.gitconfig"
+    echo "Linked .gitconfig"
+  fi
 
-# Symlink .gitignore_global
-if [ -f "$DOTFILES_DIR/.gitignore_global" ]; then
-  ln -sf "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
-  echo "Linked .gitignore_global"
+  # Symlink .gitignore_global
+  if [ -f "$DOTFILES_DIR/.gitignore_global" ]; then
+    ln -sf "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
+    echo "Linked .gitignore_global"
+  fi
+else
+  echo "Dotfiles directory not found at $DOTFILES_DIR. Skipping symlinks."
 fi
 
 ############################
